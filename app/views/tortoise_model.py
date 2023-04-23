@@ -12,6 +12,7 @@ class Products(models.Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=255)
     price = fields.IntField(validators=[MinValueValidator(0)])
+    count = fields.IntField(validators=[MinValueValidator(0)])
     foto_loc = fields.CharField(max_length=255,null=True)
     followed_by: fields.ManyToManyRelation["Users"]
     class Meta:
