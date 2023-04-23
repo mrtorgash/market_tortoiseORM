@@ -39,11 +39,20 @@ app.include_router(auth_router)
 app.include_router(prod_router)
 app.include_router(follow_router)
 
+TORTOISE_ORM = {
+    "connections": {"default": "postgres://postgres:postgres@localhost:5432/market_new"},
+    "apps": {
+        "models": {
+            "models": ["app.views.tortoise_model", "aerich.models"],
+            "default_connection": "default",
+        },
+    },
+}
 
 register_tortoise(
     app,
     db_url="postgres://postgres:postgres@localhost:5432/market_new",
-    modules={"models": ["app.views.tortoise_model"]},
+    modules={"models": ["app.views.tortoise_model","aerich.models"]},
     generate_schemas=True,
     add_exception_handlers=True,
 )
